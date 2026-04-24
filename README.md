@@ -10,6 +10,3 @@ Implementasi sistem P2P Lending menggunakan:
 - Loan creation
 - Credit scoring
 - Unit testing
-
-## Author
-Alifah Zachra S.
