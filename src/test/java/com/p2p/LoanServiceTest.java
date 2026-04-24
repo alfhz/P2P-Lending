@@ -84,7 +84,7 @@ public class LoanServiceTest {
         assertTrue(true);
     
     }
-    
+
     // =====================================================
     // TEST CASE TC-03
     // =====================================================
@@ -107,5 +107,30 @@ public class LoanServiceTest {
         Loan loan = loanService.createLoan(borrower, amount);
 
         assertEquals(Loan.Status.APPROVED, loan.getStatus());
+    
+    }
+    
+    // =====================================================
+    // TEST CASE TC-04
+    // =====================================================
+    @Test
+    void shouldRejectLoanWhenCreditScoreLow(){
+        // =====================================================
+        // SCENARIO:
+        // Borrower terverifikasi dan credit score < threshold
+        // Ketika borrower mengajukan pinjaman
+        // Maka sistem memberikan keputusan "REJECTED"
+        // =====================================================
+
+        Borrower borrower = new Borrower(true, 500);
+        LoanService loanService = new LoanService();
+        BigDecimal amount = BigDecimal.valueOf(1000);
+
+        // =========================
+        // Act (Action)
+        // =========================
+        Loan loan = loanService.createLoan(borrower, amount);
+
+        assertEquals(Loan.Status.REJECTED, loan.getStatus());
     }
 }

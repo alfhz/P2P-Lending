@@ -34,6 +34,8 @@ public class LoanService {
             logger.info("Credit score {} memenuhi syarat. Status: APPROVED.", borrower.getCreditScore());
             loan.approve();
         } else {
+            // action keputusan rejected
+            logger.warn("Credit score {} tidak memenuhi syarat. Status: REJECTED.", borrower.getCreditScore());
             loan.reject();
         }
 
