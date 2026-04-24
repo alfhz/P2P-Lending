@@ -21,4 +21,14 @@ public class Loan {
     public Status getStatus() {
         return status;
     }
+
+    // =========================
+    // DOMAIN BEHAVIOR
+    // =========================
+    public void approve() {
+        this.status = Status.APPROVED;
+    }
+    public void reject() {
+            this.status = Status.REJECTED;
+    }
 }
