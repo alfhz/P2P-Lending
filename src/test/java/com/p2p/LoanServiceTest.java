@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import com.p2p.domain.Borrower;
+import com.p2p.domain.Loan;
 import com.p2p.service.LoanService;
 
 public class LoanServiceTest {
@@ -81,5 +83,29 @@ public class LoanServiceTest {
 
         assertTrue(true);
     
+    }
+    
+    // =====================================================
+    // TEST CASE TC-03
+    // =====================================================
+    @Test
+    void shouldApproveLoanWhenCreditScoreHigh(){
+        // =====================================================
+        // SCENARIO:
+        // Borrower terverifikasi dan credit score ≥ threshold
+        // Ketika borrower mengajukan pinjaman
+        // Maka sistem memberikan keputusan "APPROVED"
+        // =====================================================
+
+        Borrower borrower = new Borrower(true, 700);
+        LoanService loanService = new LoanService();
+        BigDecimal amount = BigDecimal.valueOf(1000);
+
+        // =========================
+        // Act (Action)
+        // =========================
+        Loan loan = loanService.createLoan(borrower, amount);
+
+        assertEquals(Loan.Status.APPROVED, loan.getStatus());
     }
 }

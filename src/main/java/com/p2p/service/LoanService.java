@@ -30,6 +30,8 @@ public class LoanService {
         // BUSINESS ACTION (domain behavior)
         // =========================
         if (borrower.getCreditScore() >= 600) {
+            // action keputusan approved
+            logger.info("Credit score {} memenuhi syarat. Status: APPROVED.", borrower.getCreditScore());
             loan.approve();
         } else {
             loan.reject();
