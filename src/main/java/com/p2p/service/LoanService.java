@@ -18,7 +18,9 @@ public class LoanService {
         // VALIDASI (delegasi ke domain)
         // =========================
         validateBorrower(borrower);
+        validateAmount(amount);
 
+        
         // =========================
         // CREATE LOAN (domain object)
         // =========================
@@ -46,6 +48,11 @@ public class LoanService {
         }
         logger.info("Validasi Borrower: Berhasil.");
     }
-
-
+    private void validateAmount(BigDecimal amount) {
+        if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
+            logger.error("Pembuatan loan gagal: Amount ≤ 0.");
+            throw new IllegalArgumentException("Amount must be greater than zero");
+        }
+        logger.info("Validasi Amount: Berhasil.");
+    }
 }

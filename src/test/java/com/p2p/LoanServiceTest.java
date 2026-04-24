@@ -56,5 +56,30 @@ public class LoanServiceTest {
     }
     
 
+    // =====================================================
+    // TEST CASE TC-02
+    // =====================================================
+    @Test
+    void shouldRejectLoanWhenAmountIsZeroOrNegative(){
+        // =====================================================
+        // SCENARIO:
+        // Borrower terverifikasi tetapi amount ≤ 0
+        // Ketika borrower mengajukan pinjaman
+        // Maka sistem harus menolak dengan melempar exception
+        // =====================================================
+
+        Borrower borrower = new Borrower(true, 700);
+        LoanService loanService = new LoanService();
+        BigDecimal amount = BigDecimal.valueOf(0);
+
+        // =========================
+        // Act (Action)
+        // =========================
+        assertThrows(IllegalArgumentException.class, () -> {
+            loanService.createLoan(borrower, amount); 
+        });
+
+        assertTrue(true);
     
+    }
 }
